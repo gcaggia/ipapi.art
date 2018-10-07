@@ -1,3 +1,60 @@
-h1 {
-    color: darkgreen;
+html, body {
+    background-color: #342f2f;
+}
+
+main {
+    color: #FFF;
+    /*left: 48%;*/
+    max-width: 330px;
+    padding: 80px 15px 0px 15px;
+    margin: auto;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.h1-title {
+    font-family: 'Patrick Hand', cursive;
+    letter-spacing: 3px;
+    position: relative;
+    top: -50px;
+    left: -10px;
+    margin: auto;
+    color: #FFF;
+}
+
+.card {
+    color: green;
+}
+
+.quote {
+    font-size: 14px;
+}
+
+.quote-author {
+    font-size: 16px;
+}
+
+#app-footer {
+    font-family: 'Patrick Hand', cursive;
+    letter-spacing: 2px;
+    position: fixed;
+    left: -10px;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 80px;
+    color: #FFF;
+}
+
+canvas {
+    display: block;
+    vertical-align: bottom;
+}
+
+#particles-js {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
 }

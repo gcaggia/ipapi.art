@@ -18,15 +18,11 @@ func main() {
 			http.ServeFile(writer, request, "public/" + request.URL.Path[1:])
 		}
 	})
-	// fs := http.FileServer(http.Dir("public"))
-	// http.Handle("/", fs)
-
 
 	http.HandleFunc("/api", func(writer http.ResponseWriter, request *http.Request) {
 		writer.Write([]byte("API Go test!"))
 	})
 
-	log.Println("App is running")
-	log.Println("Curently listening on http://127.0.0.1:5000")
+	log.Println("App is running on http://127.0.0.1:5000")
 	http.ListenAndServe(":5000", nil)
 }
