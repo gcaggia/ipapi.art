@@ -4,9 +4,18 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"html/template"
 )
 
+type Visitor struct {
+	IP string
+}
+
 func main() {
+
+	http.Handle("/assets/",
+		http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
 
 	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		user_agent := request.UserAgent()
@@ -14,8 +23,11 @@ func main() {
 		if strings.Contains(user_agent, "curl") {
 			writer.Write([]byte("curl!"))
 		} else {
-
-			http.ServeFile(writer, request, "public/" + request.URL.Path[1:])
+			tmplt := template.New("index.go.html")       //create a new template with some name
+			tmplt, _ = tmplt.ParseFiles("index.go.html")
+			ip := "123.123.12.1"
+			visitor := Visitor{IP: ip}
+			tmplt.Execute(writer, visitor)
 		}
 	})
 
