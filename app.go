@@ -11,6 +11,15 @@ type Visitor struct {
 	IP string
 }
 
+func GetIP(r *http.Request) (ip string) {
+	ip = r.Header.Get("X-Forwarded-For")
+	if ip == "" {
+		ip = strings.Split(r.RemoteAddr, ":")[0]
+	}
+	// user_agent = r.UserAgent()
+	return ip
+}
+
 func main() {
 
 	http.Handle("/assets/",
@@ -19,13 +28,13 @@ func main() {
 
 	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
 		user_agent := request.UserAgent()
+		ip := GetIP(request)
 		log.Println("user_agent is " + user_agent)
 		if strings.Contains(user_agent, "curl") {
 			writer.Write([]byte("curl!"))
 		} else {
 			tmplt := template.New("index.go.html")       //create a new template with some name
 			tmplt, _ = tmplt.ParseFiles("index.go.html")
-			ip := "123.123.12.1"
 			visitor := Visitor{IP: ip}
 			tmplt.Execute(writer, visitor)
 		}
