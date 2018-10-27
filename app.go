@@ -31,7 +31,7 @@ func main() {
 		ip := GetIP(request)
 		log.Println("user_agent is " + user_agent)
 		if strings.Contains(user_agent, "curl") {
-			writer.Write([]byte("curl!"))
+			writer.Write([]byte("Your public ip is " + ip + " "))
 		} else {
 			tmplt := template.New("index.go.html")       //create a new template with some name
 			tmplt, _ = tmplt.ParseFiles("index.go.html")
@@ -44,6 +44,6 @@ func main() {
 		writer.Write([]byte("API Go test!"))
 	})
 
-	log.Println("App is running on http://127.0.0.1:5000")
-	http.ListenAndServe(":5000", nil)
+	log.Println("App is running on http://127.0.0.1:18000")
+	http.ListenAndServe(":18000", nil)
 }
