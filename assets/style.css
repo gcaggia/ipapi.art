@@ -20,6 +20,7 @@ main {
     left: -10px;
     margin: auto;
     color: #FFF;
+    z-index: 4;
 }
 
 .card {
@@ -34,6 +35,18 @@ main {
     font-size: 16px;
 }
 
+.card-title {
+    color: #89ab89;
+}
+
+.card-text {
+    font-size: 28px;
+}
+
+#card-body {
+    z-index: 4;
+}
+
 #app-footer {
     font-family: 'Patrick Hand', cursive;
     letter-spacing: 2px;
@@ -43,6 +56,7 @@ main {
     width: 100%;
     padding-bottom: 80px;
     color: #FFF;
+    z-index: 4;
 }
 
 canvas {

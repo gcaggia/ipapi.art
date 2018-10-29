@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
+	"path/filepath"
 	"strings"
 	"html/template"
 )
@@ -33,15 +35,23 @@ func main() {
 		if strings.Contains(user_agent, "curl") {
 			writer.Write([]byte("Your public ip is " + ip + " "))
 		} else {
-			tmplt := template.New("index.go.html")       //create a new template with some name
-			tmplt, _ = tmplt.ParseFiles("index.go.html")
+			absPath, _ := filepath.Abs("")
+			tmplt, err := template.ParseFiles(absPath + "/templates/index.go.html")
+
+			if err != nil {
+				http.Error(writer, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
 			visitor := Visitor{IP: ip}
 			tmplt.Execute(writer, visitor)
 		}
 	})
 
 	http.HandleFunc("/api", func(writer http.ResponseWriter, request *http.Request) {
-		writer.Write([]byte("API Go test!"))
+		visitor := Visitor{IP: GetIP(request)}
+		writer.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(writer).Encode(visitor)
 	})
 
 	log.Println("App is running on http://127.0.0.1:18000")
