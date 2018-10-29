@@ -13,5 +13,3 @@ COPY --from=builder /app/templates/ /app/templates/
 WORKDIR /app
 EXPOSE 18000
 ENTRYPOINT ["/app/main"]
-
-# CMD ["/app/main"]
