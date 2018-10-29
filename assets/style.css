@@ -36,11 +36,18 @@ main {
 }
 
 .card-title {
+    text-align: center;
     color: #89ab89;
 }
 
 .card-text {
+    text-align: center;
     font-size: 28px;
+}
+
+#btn-curl-clipboard {
+    margin: auto;
+    display: inherit;
 }
 
 #card-body {
