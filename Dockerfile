@@ -1,5 +1,5 @@
 # STEP 1 build executable binary
-FROM golang:latest as builder
+FROM golang:alpine as builder
 RUN mkdir /app
 ADD . /app/
 WORKDIR /app
